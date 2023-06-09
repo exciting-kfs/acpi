@@ -81,12 +81,12 @@ pub use hpet::HpetInfo;
 pub use madt::MadtError;
 pub use rsdp::{
     handler::{AcpiHandler, PhysicalMapping},
+    Rsdp,
     RsdpError,
 };
 
 use crate::sdt::{SdtHeader, Signature};
 use core::mem;
-use rsdp::Rsdp;
 
 /// Result type used by error-returning functions.
 pub type AcpiResult<T> = core::result::Result<T, AcpiError>;
