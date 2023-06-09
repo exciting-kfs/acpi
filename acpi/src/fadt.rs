@@ -93,7 +93,7 @@ pub struct Fadt {
     pub day_alarm: u8,
     pub month_alarm: u8,
     pub century: u8,
-    pub iapc_boot_arch: IaPcBootArchFlags,
+    iapc_boot_arch: IaPcBootArchFlags,
     _reserved2: u8, // must be 0
     pub flags: FixedFeatureFlags,
     reset_reg: RawGenericAddress,
@@ -345,6 +345,12 @@ impl Fadt {
         } else {
             Ok(None)
         }
+    }
+
+    pub fn iapc_boot_arch(&self) -> IaPcBootArchFlags {
+        let ptr = &self.century as *const u8 as *const usize;
+        let value = (unsafe { *ptr } >> 8) & 0xff;
+        IaPcBootArchFlags(value as u16)
     }
 }
 
